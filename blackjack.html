@@ -1,0 +1,544 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="main.css">
+        <title>Neurogram | Black Jack</title>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+
+    </head>
+    <body class="blackjackbody">
+
+        <div id="modeltrainingscreen">
+            <div class="vertical">
+                <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                <div class="margin20"></div>
+                <h2>Die künstliche Intelligenz wird gerade trainiert.</h2>
+                <div class="margin10"></div>
+                <p>Bitte habe noch einen Moment Geduld.</p>
+                <div class="margin10"></div>
+            </div>
+        </div>
+
+
+        <div id="blackjacklosescreen">
+            <div class="vertical">
+                <h1>Zu hoch gepokert.</h1>
+                <br>
+                <p>Deine Punktzahl ist höher als 21 Punkte.</p>
+            </div>
+        </div>
+
+        <div id="endGameScreen">
+            <div class="vertical">
+                <h1 id="endGameScreenh1"></h1>
+                <br>
+                <p id="endGameScreenText"></p>
+            </div>
+        </div>
+
+
+        <div class="blackjackstats">
+            <p id="winstext" style="color:#fff;">0 Spiele gewonnen</p>
+            <p id="lossestext" style="color:#aaa;">0 Spiele verloren</p>
+        </div>
+
+
+        <div class="blackjacknav">
+            <a class="blackjacktitle" href="home.html">Neurogram &nbsp; | &nbsp; <b>Black Jack</b></a>
+            <!--<a class="helmetbutton">Account</a>-->
+
+        </div>
+       
+
+            <div class="blackjacktable" onclick="makeMove()">
+                
+                <div class="vertical">
+                    <h1 id="blackjackpoints"><b>20 Punkte</b></h1>
+                
+                    <br><br><br>
+                    <div id="blackjackcards">
+                        <!--img class="blackjackcard" src="img/jh.png">
+                        <img class="blackjackcard" src="img/jh.png">-->
+                    </div>
+                    <br><br><br>
+                    <h1>Nimmst du eine weitere Karte?</h1>
+                    <div class="backgroundloadingbarblackjack">
+                        <div class="insideloadingbarblackjack" id="insideloadingbarblackjack"></div>
+                    </div>
+                </div>
+            </div>
+
+       
+
+
+
+
+
+
+        </div>
+
+        <div class="footer"></div>
+
+        <div id="verbundenleiste"">
+            <div class="content"><img src="img/comwhite.png" class="verbundenimg"><p>Verbunden mit Neurogram OpenBCI Hat.</p></div>
+        </div>
+
+        <div id="nichtverbundenliste">
+            <div class="content"><img src="img/comblack.png" class="verbundenimg"><p>Kein Gerät verbunden.</p></div>
+        </div>
+    
+    </body>
+
+</html>
+
+
+
+
+<script>
+
+
+    var wins = 0
+    var losses = 0
+
+    var dealer = 0;
+    var player = 0;
+
+    var takenCards = []
+
+
+    var timeoutHandle = setTimeout(() => {
+        endGame()
+    }, 10000000000000000000000000000000000000000000000000)
+
+
+
+
+
+
+
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+
+    function dealerScore() {
+        return parseInt(getRandomArbitrary(11,24));
+    }
+
+    function takeCard() {
+
+        var cardNumber = parseInt(getRandomArbitrary(2,14))
+        var cardValue = cardNumber
+        var cardName = cardNumber
+
+        var cardKindNumber = parseInt(getRandomArbitrary(1,4))
+        var cardKind = "C"
+        
+        if (cardNumber > 11) {
+            cardValue = 10
+        }
+
+        if (cardKindNumber == 1) {
+            cardKind = "C"
+        }
+        else if (cardKindNumber == 2) {
+            cardKind = "D"
+        }
+        else if (cardKindNumber == 3) {
+            cardKind = "H"
+        }
+        else {
+            cardKind = "S"
+        }
+
+        if (cardNumber == 11) {
+            cardName = "A"
+        }
+        else if (cardNumber == 12) {
+            cardName = "J"
+        }
+        else if (cardNumber == 13) {
+            cardName = "K"
+        }
+        else if (cardNumber == 12) {
+            cardName = "Q"
+        }
+
+        var cardRes = cardName.toString() + cardKind
+
+        if(takenCards.includes(cardRes)) {
+            return takeCard()
+        }
+        else {
+            takenCards.push(cardRes)
+            return ([cardValue, cardRes])
+        }
+
+    }
+
+
+    function makeMove() {
+
+        clearTimeout(timeoutHandle);
+
+        var cardValue = 0
+        var cardRes = ""
+
+        var cardArray = takeCard()
+        cardValue = cardArray[0]
+        cardRes = cardArray[1]
+
+        player += cardValue
+
+
+        document.getElementById("blackjackcards").innerHTML += "<img class=\"blackjackcard\" src=\"img/blackjackcards/" + cardRes + ".png\">"
+        document.getElementById("blackjackpoints").innerHTML = "<b>" + player + " Punkte</b>"
+
+
+
+        if (player > 21) {
+            endGame(true)
+        }
+
+
+        
+
+        timeoutHandle = setTimeout(() => {
+            endGame()
+        }, 10000)
+
+
+    }
+
+
+
+
+    function endGame(tooHigh) {
+
+
+        if (tooHigh) {
+
+            document.getElementById("blackjacklosescreen").style.display = "block";
+            document.getElementById("insideloadingbarblackjack").style.display = "none";
+            setTimeout(() => {
+                document.getElementById("blackjackcards").innerHTML = "";
+                document.getElementById("insideloadingbarblackjack").style.display = "block";
+                document.getElementById("blackjacklosescreen").style.display = "none";
+            }, 3000)
+
+            losses += 1
+
+        }
+
+
+        else {
+            dealer = parseInt(getRandomArbitrary(12,24))
+            takenCards = []
+
+
+            if (dealer > 21) {
+                document.getElementById("endGameScreenh1").innerHTML = "Gewonnen!"
+                wins += 1
+                
+            }
+
+            else if (player > dealer) {
+                document.getElementById("endGameScreenh1").innerHTML = "Gewonnen!"
+                wins += 1
+                
+            }
+
+            else if (player == dealer) {
+                document.getElementById("endGameScreenh1").innerHTML = "Untentschieden!"
+                
+            }
+            else {
+                document.getElementById("endGameScreenh1").innerHTML = "Leider verloren!"
+                losses += 1
+            }
+
+
+            document.getElementById("endGameScreenText").innerHTML = "Du hast " + player + " Punkte und der Dealer hat " + dealer + " Punkte." 
+            
+            document.getElementById("endGameScreen").style.display = "block"; 
+
+        }
+        
+
+
+        countWinsAndLosses()
+
+
+
+        
+
+
+        setTimeout(() => {
+            player = 0
+
+            document.getElementById("blackjackcards").innerHTML = ""
+            document.getElementById("endGameScreen").style.display = "none"; 
+
+            makeMove()
+
+            
+        }, 3000)
+
+
+
+        
+    }
+
+
+
+    function countWinsAndLosses() {
+        if (losses == 1) {
+            document.getElementById("lossestext").innerHTML = losses + " Spiel verloren"
+        }
+        else {
+            document.getElementById("lossestext").innerHTML = losses + " Spiele verloren"
+        }
+        if (wins == 1) {
+            document.getElementById("winstext").innerHTML = wins + " Spiel gewonnen"
+        }
+        else {
+            document.getElementById("winstext").innerHTML = wins + " Spiele gewonnen"
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    makeMove()
+
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+    /*
+
+
+    // Initialize Cloud Firestore through Firebase
+    firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+
+
+        var cityRef = db.collection('platform').doc('platform');
+
+        var setWithMerge = cityRef.set({
+            classification_status: false,
+            initialization_status: false,
+            advancedtraining_status: false,
+            youtube_status: false,
+        }, { merge: true });
+
+
+
+
+    var connectionState = false
+
+    function changeConnectionState() {
+
+        if (connectionState == false) {
+            connectionState = true;
+            document.getElementById("nichtverbundenliste").style.display = "none";
+            document.getElementById("verbundenleiste").style.display = "block";
+        }
+        else {
+            connectionState = false;
+            document.getElementById("nichtverbundenliste").style.display = "block";
+            document.getElementById("verbundenleiste").style.display = "none";
+            
+        }
+        
+    }
+
+    //setTimeout(() => {changeConnectionState()}, 2000)
+
+
+    var docRef = db.collection("platform").doc("platform");
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+
+
+            if(doc.data().ai_is_training) {
+                document.getElementById("modeltrainingscreen").style.display = "block";
+            }
+            else {
+                document.getElementById("modeltrainingscreen").style.display = "none";
+            }
+
+
+
+
+            if(doc.data().connection == true) {
+                document.getElementById("verbundenleiste").style.display = "block"
+                connectionState = true
+            }
+            else {
+                document.getElementById("nichtverbundenliste").style.display = "block"
+
+
+                document.getElementById("firstappicon").classList.add("inactiveappicon");
+            document.getElementById("secondappicon").classList.add("inactiveappicon");
+            document.getElementById("thirdappicon").classList.add("inactiveappicon");
+            document.getElementById("fourthappicon").classList.add("inactiveappicon");
+                
+                connectionState = false
+            }
+
+
+
+            if(doc.data().initialization_done == false) {
+                document.getElementById("secondappicon").classList.add("inactiveappicon");
+                document.getElementById("thirdappicon").classList.add("inactiveappicon");
+                document.getElementById("fourthappicon").classList.add("inactiveappicon");
+                document.getElementById("fourthappicon").classList.add("inactiveappicon");
+
+            }
+
+
+
+        }
+        else {
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
+
+
+
+
+    setInterval(() => {
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+
+
+            if(doc.data().ai_is_training) {
+                document.getElementById("modeltrainingscreen").style.display = "block";
+            }
+            else {
+                document.getElementById("modeltrainingscreen").style.display = "none";
+            }
+
+            if(doc.data().connection) {
+                if (connectionState == false) {
+                    document.getElementById("nichtverbundenliste").style.display = "none"
+                    document.getElementById("verbundenleiste").style.display = "block"
+                    connectionState = true
+
+                    document.getElementById("firstappicon").classList.remove("inactiveappicon");
+            document.getElementById("secondappicon").classList.remove("inactiveappicon");
+            document.getElementById("thirdappicon").classList.remove("inactiveappicon");
+            document.getElementById("fourthappicon").classList.remove("inactiveappicon");
+                }
+                
+            }
+            else {
+                if (connectionState == true) {
+                    document.getElementById("nichtverbundenliste").style.display = "block"
+                    document.getElementById("verbundenleiste").style.display = "none"
+                    connectionState = false
+
+                    document.getElementById("firstappicon").classList.add("inactiveappicon");
+            document.getElementById("secondappicon").classList.add("inactiveappicon");
+            document.getElementById("thirdappicon").classList.add("inactiveappicon");
+            document.getElementById("fourthappicon").classList.add("inactiveappicon");
+                }
+            }
+
+            if(doc.data().initialization_done == true) {
+                document.getElementById("firstappicon").classList.remove("inactiveappicon");
+                document.getElementById("secondappicon").classList.remove("inactiveappicon");
+                document.getElementById("thirdappicon").classList.remove("inactiveappicon");
+                document.getElementById("fourthappicon").classList.remove("inactiveappicon");
+            }
+            else {
+                document.getElementById("secondappicon").classList.add("inactiveappicon");
+                document.getElementById("thirdappicon").classList.add("inactiveappicon");
+                document.getElementById("thirdappicon").classList.add("inactiveappicon");
+                document.getElementById("fourthappicon").classList.add("inactiveappicon");
+
+            }
+            
+
+
+            
+
+
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
+}, 2000);
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+</script>

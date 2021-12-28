@@ -1,0 +1,377 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="main.css">
+        <title>Neurogram | Youtube</title>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+
+</head>
+    <body id="youtubebody">
+       
+        <div class="videoscreen" id="videoscreenone">    
+            <a href="youtube.html"><div id="videoendscreen"></div> </a>
+            <div id="playerOne"></div>
+
+            <script>
+
+        const queryString = window.location.search;
+        console.log(queryString);   
+        const urlParams = new URLSearchParams(queryString);
+        console.log(urlParams);
+
+        var id = ""
+
+        if (queryString == "?v=one") {
+            id = 'RLdX_4-cbXQ'
+        }
+        else if (queryString == "?v=two") {
+            id = 'V7RqGERfcwU'
+        }
+        else if (queryString == "?v=three") {
+            id = 'CfBM-DiS0uE'
+        }
+
+
+
+              // 2. This code loads the IFrame Player API code asynchronously.
+              var tag = document.createElement('script');
+        
+              tag.src = "https://www.youtube.com/iframe_api";
+              var firstScriptTag = document.getElementsByTagName('script')[0];
+              firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+              // 3. This function creates an <iframe> (and YouTube player)
+              //    after the API code downloads.
+              var player;
+              function onYouTubeIframeAPIReady() {
+                player = new YT.Player('playerOne', {
+                  height: '100%',
+                  width: '100%',
+                  videoId: id,
+                  events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                  }
+                });
+              }
+        
+              // 4. The API will call this function when the video player is ready.
+              function onPlayerReady(event) {
+                event.target.playVideo();
+                if(id == "") {
+                    pauseVideo()
+                }
+              }
+        
+              // 5. The API calls this function when the player's state changes.
+              //    The function indicates that when playing a video (state=1),
+              //    the player should play for six seconds and then stop.
+              var done = false;
+              function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.PLAYING && !done) {
+                  done = true;
+                }
+              }
+              function stopVideo() {
+                player.stopVideo();
+              }
+              function pauseVideo() {
+                player.pauseVideo();
+              }
+              function playVideo() {
+                  player.playVideo();
+              }
+
+              
+            </script>
+        
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="initnav" id="youtubenav">
+                <a class="inittitle" href="home.html"><b>Neurogram</b> | Youtube</a>
+                <div class="profileiconyoutube"><div class="vertical"><img src="img/profileimg.png" class="profileimg"></div></div>
+                <a class="navlink">Hilfe</a>
+                <a class="navlink">Analytics</a>
+            </div>
+
+
+            
+            <div class="videobackgrounds" id="videobackgrounds">
+                <div class="videobackground" id="vbone">
+                    <div class="content" id="youtubecontentone">
+                        <div class="contentleftyoutube">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/RLdX_4-cbXQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <a href="youtube.html?v=one">
+                            <div class="contentrightyoutube">
+                                <p>Arte de</p>
+                                <h1>Wie die Katze die Welt eroberte</h1>
+                                <div class="margin10"></div>
+                                <p class="videodescr">51:44 min &nbsp; | &nbsp; 11.12.2021</p>
+                                <div class="margin20"></div>
+                                <p id="contentrightyoutubep">400 Millionen Katzen leben heute unter uns, und es werden immer<br>mehr. Nichts scheint ihren Siegeszug aufhalten zu können.</p>
+                                <br><br>
+                                <a class="playbutton" href="youtube.html?v=one"><b>&#9654;</b> Jetzt ansehen</a>
+                            </div>
+                        </a>
+                    
+                    </div>
+                    
+                    </div>
+                
+
+                
+                <div class="videobackground" id="vbtwo">
+                    <div class="content" id="youtubecontenttwo">
+                        <div class="contentleftyoutube">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/V7RqGERfcwU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <a href="youtube.html?v=two">
+                            <div class="contentrightyoutube">
+                                <p>Knuddel die Katz'</p>
+                                <h1>6 Dinge, die deine Katze mehr liebt,<br>als gestreichelt werden</h1>
+                                <div class="margin10"></div>
+                                <p class="videodescr">06:26 min &nbsp; | &nbsp; 15.05.2021</p>
+                                <div class="margin20"></div>
+                                <p id="contentrightyoutubep">Katzen haben immer und überall ihren eigenen Kopf. Nicht umsonst heißt<br>es, dass Du in Deinen eigenen vier Wänden quasi der Angestellte Deiner<br>Mieze bist.</p>
+                                <br><br>
+                                <a class="playbutton" href="youtube.html?v=two"><b>&#9654;</b> Jetzt ansehen</a>
+                            </div>
+                        </a>
+                    
+                    </div>
+                
+                </div>
+                
+
+
+
+                
+                <div class="videobackground" id="vbthree">
+                    <div class="content" id="youtubecontentthree">
+                        <div class="contentleftyoutube">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CfBM-DiS0uE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <a href="youtube.html?v=three"></a>
+                            <div class="contentrightyoutube">
+                                <p>Lustige Tiere</p>
+                                <h1>Lustige Tiervideos Zum Totlachen</h1>
+                                <div class="margin10"></div>
+                                <p class="videodescr">10:49 min &nbsp; | &nbsp; 22.01.2020</p>
+                                <div class="margin20"></div>
+                                <p id="contentrightyoutubep">Eine Sammlung lustiger Videos von Tieren, die dich<br>garantiert zum Lachen bringen werden!</p>
+                                <br><br>
+                                <a class="playbutton" href="youtube.html?v=three"><b>&#9654;</b> Jetzt ansehen</a>
+                            </div>
+                        </a>
+                    
+                    </div>
+                
+                </div>
+                
+
+                
+
+            
+
+
+
+
+            </div>
+           
+
+
+
+
+
+
+
+
+        <div class="bottomblur">
+            <div class="videopoints" id="videopoints">
+                <div class="videopoint"">
+                    <div class="innerpoint" id="pointone"></div>
+                </div>
+                <div class="videopoint">
+                    <div class="innerpoint" id="pointtwo"></div>
+                </div>
+                <div class="videopoint"">
+
+                    <div class="innerpoint" id="pointthree"></div>
+                </div>
+
+            </div>
+        </div>
+            
+            
+          
+   
+
+
+
+
+
+
+            
+        </div>
+        
+
+
+    </body>
+    <script>
+
+
+
+        var iteration_time = 36000
+        var iteration_time_count = 0
+   
+        function playVideoDisplay() {
+            document.getElementById("videoscreenone").style.display = "block";
+            document.getElementById("videobackgrounds").style.display = "none";
+            document.getElementById("videopoints").style.display = "none";
+            
+            
+            playVideo()
+        }
+        function stopVideoDisplay() {
+            stopVideo()
+            document.getElementById("videoscreenone").style.display = "none";
+            document.getElementById("videobackgrounds").style.display = "block";
+            document.getElementById("videopoints").style.display = "block";
+        }
+
+
+        function chooseVideo(video) {
+            window.open("youtube.html" + video,"_self")
+        }
+
+
+
+              
+        
+
+
+        // Initialize Cloud Firestore through Firebase
+        firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+
+        var docRef = db.collection("youtube").doc("youtube");
+
+
+
+
+    
+
+        if (queryString.includes('?v=')) {
+            playVideoDisplay()
+        }
+        else {
+            var startTime = Date.now()
+
+            var cityRef = db.collection('platform').doc('platform');
+
+            var setWithMerge = cityRef.set({
+                youtube_startpoint: startTime + 2000
+            }, { merge: true });
+   
+        }
+
+
+        
+
+
+
+        setInterval(() => {
+
+
+
+
+    docRef.get().then((doc) => {
+    if (doc.exists) {
+      
+        if(doc.data().hand_up) {
+
+            if(!doc.data().video_plays) {
+
+                var setWithMerge = docRef.set({
+                    video_plays: true,
+                    hand_up: false,
+                }, { merge: true });
+
+                if (iteration_time_count < iteration_time / 3) {
+                    window.open("youtube.html?v=one" + video,"_self")
+                }
+                else if (iteration_time_count >= iteration_time / 3 && iteration_time_count < iteration_time / 3 * 2) {
+                    window.open("youtube.html?v=two","_self")
+                }
+                else {
+                    window.open("youtube.html?v=three","_self")
+                }
+            }
+            else {
+
+                var setWithMerge = docRef.set({
+                    video_plays: false,
+                    hand_up: false,
+                }, { merge: true });
+
+            window.open("youtube.html","_self")
+            }
+
+
+
+        }
+
+
+
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
+
+
+
+iteration_time_count += 1000
+
+if (iteration_time_count == 36000) {
+    iteration_time_count = 0
+}
+
+}, 1000);
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+</html>

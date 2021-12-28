@@ -1,0 +1,514 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="cat.css">
+        <title>Neurogram Initialisierung</title>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+    <body>
+
+
+      
+
+      <div id="initReadyScreen">
+        <div class="vertical">
+            <h1 id="initreadyh1"></h1>
+            <p id="initreadytext"></p>
+        </div>
+    </div>
+
+  
+
+
+
+
+        <div id="logoscreen">
+            <div class="vertical">
+                <div class="logobox">
+                <h2 class="jt --debug">
+                    <span class="jt__row">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                    <span class="jt__row jt__row--sibling" aria-hidden="true">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                    <span class="jt__row jt__row--sibling" aria-hidden="true">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                    <span class="jt__row jt__row--sibling" aria-hidden="true">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                  </h2>
+                  <br><br>
+                </div>
+            </div>
+            
+
+       
+        </div>
+
+
+
+
+
+
+
+
+
+        <div id="aniwrap">
+            <div class="all-wrap" id="all-wrap">  
+                <div class="all">
+                  <div class="yarn"></div>
+                  <div class="cat-wrap">    
+                    <div class="cat">
+                      <div class="cat-upper">
+                        <div class="cat-leg"></div>
+                        <div class="cat-leg"></div>
+                        <div class="cat-head">
+                          <div class="cat-ears">
+                            <div class="cat-ear"></div>
+                            <div class="cat-ear"></div>
+                          </div>
+                          <div class="cat-face">
+                            <div class="cat-eyes"></div>
+                            <div class="cat-mouth"></div>
+                            <div class="cat-whiskers"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cat-lower-wrap">
+                        <div class="cat-lower">
+                          <div class="cat-leg">
+                            <div class="cat-leg">
+                              <div class="cat-leg">
+                                <div class="cat-leg">
+                                  <div class="cat-leg">
+                                    <div class="cat-leg">
+                                      <div class="cat-leg">
+                                        <div class="cat-leg">
+                                          <div class="cat-leg">
+                                            <div class="cat-leg">
+                                              <div class="cat-leg">
+                                                <div class="cat-leg">
+                                                  <div class="cat-leg">
+                                                    <div class="cat-leg">
+                                                      <div class="cat-leg">
+                                                        <div class="cat-leg">
+                                                          <div class="cat-paw"></div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="cat-leg">
+                            <div class="cat-leg">
+                              <div class="cat-leg">
+                                <div class="cat-leg">
+                                  <div class="cat-leg">
+                                    <div class="cat-leg">
+                                      <div class="cat-leg">
+                                        <div class="cat-leg">
+                                          <div class="cat-leg">
+                                            <div class="cat-leg">
+                                              <div class="cat-leg">
+                                                <div class="cat-leg">
+                                                  <div class="cat-leg">
+                                                    <div class="cat-leg">
+                                                      <div class="cat-leg">
+                                                        <div class="cat-leg">
+                                                          <div class="cat-paw"></div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="cat-tail">
+                            <div class="cat-tail">
+                              <div class="cat-tail">
+                                <div class="cat-tail">
+                                  <div class="cat-tail">
+                                    <div class="cat-tail">
+                                      <div class="cat-tail">
+                                        <div class="cat-tail">
+                                          <div class="cat-tail">
+                                            <div class="cat-tail">
+                                              <div class="cat-tail">
+                                                <div class="cat-tail">
+                                                  <div class="cat-tail">
+                                                    <div class="cat-tail">
+                                                      <div class="cat-tail">
+                                                        <div class="cat-tail -end"></div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+      <div id="advtrainingscreen">
+
+        <div class="initnav" id="noanimation">
+            <a class="inittitle" href="home.html">Neurogram</a>
+        </div>
+
+    <div class="content">
+        <div class="margin64"></div>
+        <h2 id="advtitle"></h2>
+        <!-- <h2 id="advtitle">Datensammlung <a id="advtimeleft">230s</a></h2> -->
+        <div class="margin32"></div>
+        <p id="advtextintro"></p>
+        <p id="advtextdesc"></p>
+
+        <img src="img/arrow.png" id="progressarrowadv">
+        <p id="arrowtextadv"></p>
+
+
+</div>
+
+      
+
+<div class="initwholeprogress" id="initwholeprogress">
+    <div class="initinnerwholeprogressadv"></div>
+</div>
+
+
+
+
+<div id="initEndScreen">
+
+  <div class="vertical">
+      <div class="stars" id="stars">
+          <img src="img/star.png" class="star">
+          <img src="img/star.png" class="star">
+          <img src="img/star.png" class="star">
+      </div>
+      <div class="margin20"></div>
+      <h2 id="endh1"><a class="invisible">i</a></h2>
+      <p id="endtext"><a class="invisible">i</a></p>
+
+  </div>
+
+</div>
+
+
+
+
+      </div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div id="initendadv">
+        <div class="vertical">
+        <div class="loaderinitend">
+          <div class="inner one"></div>
+          <div class="inner two"></div>
+          <div class="inner three"></div>
+        </div>
+        <h1 id="advinitendh1"></h1>
+        <div class="margin8"></div>
+        <p id="advinitendtext"></p>
+      </div>
+      </div>
+
+
+
+    </body>
+    <script>
+
+
+
+// Initialize Cloud Firestore through Firebase
+firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+
+
+    var startTime = Date.now()
+
+    var cityRef = db.collection('platform').doc('platform');
+
+    var setWithMerge = cityRef.set({
+        advancedtraining_startpoint: startTime + 2000
+    }, { merge: true });
+
+
+
+
+
+
+
+
+
+
+var showText = function (target, message, index, interval) {   
+            if (index < message.length) {
+                $(target).append(message[index++]);
+                setTimeout(function () { showText(target, message, index, interval); }, interval);
+            }
+        }
+
+var countdown = 10
+
+        function initPhaseCountdown() {
+            countdown = countdown - 1;
+
+            if (countdown > 1) {
+                document.getElementById("initreadytext").innerHTML = "Prozess startet in " + countdown + " Sekunden."
+            }
+            else if (countdown == 1) {
+                document.getElementById("initreadytext").innerHTML = "Prozess startet in " + countdown + " Sekunde."
+            }
+            else {
+                document.getElementById("initReadyScreen").style.display = "none"
+            }
+            
+        }
+
+
+
+
+  /*
+        // Initialize Cloud Firestore through Firebase
+        firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+      
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8",
+            authDomain: "neuroga-8e07e.firebaseapp.com",
+            projectId: "neuroga-8e07e",
+            storageBucket: "neuroga-8e07e.appspot.com",
+            messagingSenderId: "243769639637",
+            appId: "1:243769639637:web:8b51320cc152b7e1b5185c"
+        };
+
+
+        var docRef = db.collection("questionnaire").doc("questionnaire");
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+
+                document.getElementById("mainquestion").innerHTML = doc.data().question
+                document.getElementById("initializationIntervals").innerHTML = doc.data().intervals
+                document.getElementById("initializationQuality").innerHTML = doc.data().quality
+                document.getElementById("certainty").innerHTML = doc.data().certainty + "%"
+                document.getElementById("barinner").style.width = doc.data().certainty + "%"
+                //document.getElementById("qualitybar").style.width = doc.data().certainty + "%;"
+                
+
+                document.getElementById("brainactivity").innerHTML = doc.data().brainactivity
+                document.getElementById("loadingscreen").style.display = "none";
+                document.getElementById("content").style.display = "block";
+
+                
+                
+
+
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+        */
+
+        var xa = 5000;
+
+        
+
+        setTimeout(() => {
+            document.getElementById("logoscreen").style.display = "none";
+            document.getElementById("advtrainingscreen").style.display = "block";
+
+
+
+        }, 5000);
+
+        setTimeout(() => {
+            document.getElementById("logoscreen").style.display = "none";
+            document.getElementById("advtrainingscreen").style.display = "block";
+
+
+
+        }, 5500);
+
+        setTimeout(() => {showText("#advtitle", "Kalibrierung", 0, 20); }, 5500);
+        setTimeout(() => {showText("#advtextintro", "Um gedankenbasierte Kommunikation zu ermöglichen, muss eine künstliche Intelligenz mit deinen Gehirnströmen trainiert werden. Das Training hat bereits begonnen. Bleibe ganz entspannt und folge den Erklärungen und Anweisungen.", 0, 20); }, 6500);
+        setTimeout(() => {
+            document.getElementById("advtextintro").style.display = "none";
+        }, 16000);
+        setTimeout(() => {showText("#advtextdesc", "Denke immer wieder daran, deine Hände zu Fäusten zu ballen, sobald die Katze sich bewegt!", 0, 20); }, 16500);
+        setTimeout(() => {
+            document.getElementById("progressarrowadv").style.display = "block";
+        }, 19000);
+        setTimeout(() => {showText("#arrowtextadv", "Dieser Balken zeigt den Fortschritt an.", 0, 20); }, 19500);
+        setTimeout(() => {
+            document.getElementById("progressarrowadv").style.display = "none";
+            document.getElementById("arrowtextadv").style.display = "none";
+        }, 22000);
+
+        var xb = 8500
+
+
+        setTimeout(() => {document.getElementById("initReadyScreen").style.display = "block"}, xb + 14500);
+        setTimeout(() => {showText("#initreadyh1", "Bereit?", 0, 20); }, xb + 16500);
+        setTimeout(() => {showText("#initreadytext", "Prozess startet in 10 Sekunden.", 0, 20); }, xb + 18000);
+        setTimeout(() => {setInterval(() => initPhaseCountdown(), 1000 )}, xb + 19000);
+
+        setTimeout(() => {document.getElementById("aniwrap").style.display = "block"}, xb + 29500);
+        
+        var xc = xb + 29500 + 12000
+        var xinittime = 176000
+
+
+        setTimeout(() => {document.getElementById("initendadv").style.display = "block"; }, 137000);
+        setTimeout(() => {showText("#advinitendh1", "Es werden noch letzte Daten gesammelt.", 0, 20); }, 137500);
+        setTimeout(() => {showText("#advinitendtext", "Bleibe ganz entspannt und denke nicht mehr daran, Deine Hände zu Fäusten zu ballen.", 0, 20); }, 13900);
+
+
+
+        
+        setTimeout(() => {document.getElementById("initEndScreen").style.display = "block"; }, 200000);
+        setTimeout(() => {document.getElementById("initendadv").style.display = "none"; }, 200100);
+
+
+
+        setTimeout(() => {document.getElementById("stars").style.display = "block"; }, 200500);
+        setTimeout(() => {showText("#endh1", "Training abgeschlossen.", 0, 20); }, 201000);
+        setTimeout(() => {showText("#endtext", "Die künstliche Intelligenz wird mit deiner Gehirnaktivität trainiert. Nach Abschluss wirst du zur Homeseite geleitet.", 0, 20); }, 202500);
+
+        setTimeout(() => {
+            document.getElementById("initEndScreen").style.display = "none";
+            document.getElementById("initwholeprogress").style.display = "none";
+            document.getElementById("aniwrap").style.display = "none";
+            document.getElementById("logoscreen").style.display = "block";
+             }, 209500)
+
+        setTimeout(() => {window.location.href = "home.html";}, 214500)
+
+
+
+
+
+        
+
+
+        //setTimeout(() => {showText("#initializationtitle", "Initialisierungsphase", 0, 20); }, 6000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+//setTimeout(() => {document.getElementById("aniwrap").style.display = "block"}, 2000)
+
+
+    </script>
+
+
+
+</html>

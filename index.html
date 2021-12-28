@@ -1,0 +1,251 @@
+<html>
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="main.css">
+        <title>Neurogram Messenger</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+    <body>
+        <div id="logoscreen">
+            <div class="vertical">
+                <div class="logobox">
+                <h2 class="jt --debug">
+                    <span class="jt__row">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                    <span class="jt__row jt__row--sibling" aria-hidden="true">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                    <span class="jt__row jt__row--sibling" aria-hidden="true">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                    <span class="jt__row jt__row--sibling" aria-hidden="true">
+                      <span class="jt__text">Neurogram</span>
+                    </span>
+                  </h2>
+                  <br><br>
+                </div>
+            </div>
+            
+
+       
+        </div>
+        <div id="content">
+            <section>
+                <nav>
+                    <div id="left-nav">
+                        <p class="greytext">Gehirnaktivität</p>
+                
+                        <p class="whitetext" id="brainactivity">Erhöht</p>
+                    </div>
+                    <div id="right-nav">
+                        <p class="greytext">Initialisierungsqualität</p>
+                    
+                        <p class="whitetext" id="initializationQuality">Gut</p>
+                        <div class="margin32"></div>
+                        <p class="greytext">Initialisierungsintervalle</p>
+                     
+                        <p class="whitetext" id="initializationIntervals">48</p>
+                    </div>
+                </nav>
+                <center>
+                    <img id="brain" src="img/brainnew.gif" />
+                </center>
+                <footer>
+                    <div class="marginsetting"></div>
+                    <p class="greytext">Sicherheitslevel</p>
+  
+                    <p class="whitetext" id="certainty">83%</p>
+                    <div class="margin20"></div>
+                    <div id="barwhole">
+                        <div id="barinner" id="qualitybar"></div>
+                    </div>
+                </footer>
+            </section>
+            <section>
+                <div id="second-nav">
+                    <a class="whitetext" id="title" href="home.html"><b>Neurogram</b> | Messenger</a>
+                    <div class="trennstrichmessenger"></div>
+                    <div class="margin80"></div>
+                    <p class="greytext">Frage</p>
+                    <div class="margin8"></div>
+                    <h1 id="mainquestion"></h1>
+                    <div class="margin80"></div>
+                    <div class="buttons">
+                        <div class="button" id="buttonOne">
+                            <div class="vertical">
+                                <p id="answeronetext"></p>
+                            </div>
+                        </div>
+                        <div class="button" id="buttonTwo">
+                            <div class="vertical">
+                                <p id="answertwotext"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footerbutton">
+                        <div class="vertical">
+                            <img src="img/comwhite.png" class="icon-computer"><p>Neurogram OpenBCI 16S Brain helmet</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </body>
+    <script>
+
+
+    setTimeout(() => {  
+          document.getElementById("logoscreen").style.display = "none";
+          document.getElementById("content").style.display = "block";
+      }, 5000);
+
+
+        // Initialize Cloud Firestore through Firebase
+        firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+
+
+
+    var startTime = Date.now()
+
+    var cityRef = db.collection('platform').doc('platform');
+
+    var setWithMerge = cityRef.set({
+        classification_startpoint: startTime + 2000
+    }, { merge: true });
+
+
+
+
+
+
+        /*
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8",
+            authDomain: "neuroga-8e07e.firebaseapp.com",
+            projectId: "neuroga-8e07e",
+            storageBucket: "neuroga-8e07e.appspot.com",
+            messagingSenderId: "243769639637",
+            appId: "1:243769639637:web:8b51320cc152b7e1b5185c"
+        };
+      //  */
+
+      
+   
+
+        var docRef = db.collection("questionnaire").doc("questionnaire");
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+
+                document.getElementById("mainquestion").innerHTML = doc.data().question
+                document.getElementById("answeronetext").innerHTML = doc.data().answer_one
+                document.getElementById("answertwotext").innerHTML = doc.data().answer_two
+
+
+                document.getElementById("initializationIntervals").innerHTML = doc.data().intervals
+                document.getElementById("initializationQuality").innerHTML = doc.data().quality
+                document.getElementById("certainty").innerHTML = doc.data().certainty + "%"
+                document.getElementById("barinner").style.width = doc.data().certainty + "%"
+                //document.getElementById("qualitybar").style.width = doc.data().certainty + "%;"
+                
+
+                document.getElementById("brainactivity").innerHTML = doc.data().brainactivity
+
+                
+                
+
+
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+
+
+        
+        setInterval(() => {
+
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+
+                    document.getElementById("mainquestion").innerHTML = doc.data().question
+                    document.getElementById("answeronetext").innerHTML = doc.data().answer_one
+                    document.getElementById("answertwotext").innerHTML = doc.data().answer_two
+                    document.getElementById("initializationIntervals").innerHTML = doc.data().intervals
+                    document.getElementById("initializationQuality").innerHTML = doc.data().quality
+                    document.getElementById("certainty").innerHTML = doc.data().certainty + "%"
+                    //document.getElementById("qualitybar").style.width = doc.data().certainty + "%;"
+                    document.getElementById("barinner").style.width = doc.data().certainty + "%"
+                    
+
+                    document.getElementById("brainactivity").innerHTML = doc.data().brainactivity
+                    document.getElementById("logoscreen").style.display = "none";
+                    document.getElementById("content").style.display = "block";
+
+                    if (doc.data().certainty > 70) {
+                        
+                        if (doc.data().answer == "Ja") {
+                            document.getElementById("buttonOne").style.background = "#0A9C95";
+                            document.getElementById("buttonTwo").style.background = "#444";
+                        }
+                        else if (doc.data().answer == "Nein") {
+                            document.getElementById("buttonOne").style.background = "#444";
+                            document.getElementById("buttonTwo").style.background = "#0A9C95";
+                        }
+                        else {
+                            document.getElementById("buttonOne").style.background = "#444";
+                            document.getElementById("buttonTwo").style.background = "#444";
+                        }
+                    }
+                    else {
+                        document.getElementById("buttonOne").style.background = "#444";
+                        document.getElementById("buttonTwo").style.background = "#444";
+                    }
+
+                    if (doc.data().initialization_ready) {
+                        document.getElementById("initscreen").style.display = "none";
+                    }
+                    
+
+
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+            
+        }, 2000);
+        
+
+  
+
+    </script>
+
+
+
+</html>

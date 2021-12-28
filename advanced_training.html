@@ -1,0 +1,403 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="main.css">
+        <title>Neurogram Initialisierung</title>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="initscreen">
+         
+
+            <div id="logoscreen">
+                <div class="vertical">
+                    <div class="logobox">
+                    <h2 class="jt --debug">
+                        <span class="jt__row">
+                          <span class="jt__text">Neurogram</span>
+                        </span>
+                        <span class="jt__row jt__row--sibling" aria-hidden="true">
+                          <span class="jt__text">Neurogram</span>
+                        </span>
+                        <span class="jt__row jt__row--sibling" aria-hidden="true">
+                          <span class="jt__text">Neurogram</span>
+                        </span>
+                        <span class="jt__row jt__row--sibling" aria-hidden="true">
+                          <span class="jt__text">Neurogram</span>
+                        </span>
+                      </h2>
+                      <br><br>
+                    </div>
+                </div>
+                
+
+           
+            </div>
+
+
+
+            <div class="initnav" id="initnav">
+                <a class="inittitle" href="home.html">Neurogram</a>
+            </div>
+            <div id="initHandMovementScreen">
+                <div class="margin64"></div>
+                <div class="content">
+                    <h2>Initialisierungsphase <a id="initphases">1 / 15</a></h2>
+                    <div class="margin20"></div>
+                    <p id="inithandtext"></p>
+                    <img id="arrowtwo" src="img/arrowtwo.png">
+                    <p id="arrowtwotext"> </p>
+                    <div class="margin64"></div>
+
+                    <div id="initElements">
+                        <div class="kreise">
+                            <div class="kreisEins">
+                                <div class="vertical">
+                                    <div class="kreisEinsInner">
+                                        <div class="vertical">
+                                            <div class="kreisEinsInnerInner"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kreisZwei"></div>
+                            <div class="dottedline"></div>
+
+                            <div class="margin64"></div>
+                            <div class="outerprogressinit" id="outerprogressinit">
+                                <div class="innerprogressinit"></div>
+                            </div>
+                            <img id="arrowthree" src="img/arrowthree.png">
+                            <p id="arrowthreetext"></p>
+                            
+                        </div>
+                    </div>
+                    <div id="initCountdown">
+                        <div class="countdownbox">
+                            <div class="vertical">
+                                <h2 id="initcountdowntext">10</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+
+            <div id="initRelaxScreen">
+                <div class="margin64"></div>
+                <div class="content">
+                    <h2 id="initializationtitle"></h2>
+                    <div class="margin20"></div>
+                    <p id="firstSentence"></p>
+                    <div class="margin20"></div>
+                    <p id="secondSentence"></p>
+                    <div class="margin64"></div>
+                    <img src="img/arrow.png" id="progressarrow">
+                    <p id="arrowtext"></p>
+
+                    
+
+                </div>
+            </div>
+
+
+            <div id="initReadyScreen">
+                <div class="vertical">
+                    <h1 id="initreadyh1"></h1>
+                    <p id="initreadytext"></p>
+                </div>
+            </div>
+
+
+            <div id="initEndScreen">
+
+                <div class="vertical">
+                    <div class="stars">
+                        <img src="img/star.png" class="star">
+                        <img src="img/star.png" class="star">
+                        <img src="img/star.png" class="star">
+                    </div>
+                    <div class="margin32"></div>
+                    <h2 id="endh1"><a class="invisible">i</a></h2>
+                    <div class="margin20"></div>
+                    <p id="endtext"><a class="invisible">i</a></p>
+
+                </div>
+
+            </div>
+
+
+
+
+            
+        </div>
+        
+
+        <div class="initwholeprogress" id="initwholeprogress">
+            <div class="initinnerwholeprogress"></div>
+        </div>
+
+    </body>
+    <script>
+
+        // Initialize Cloud Firestore through Firebase
+        firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+
+
+    var startTime = Date.now()
+
+    var cityRef = db.collection('platform').doc('platform');
+
+    var setWithMerge = cityRef.set({
+        initialization_startpoint: startTime + 2000
+    }, { merge: true });
+
+
+
+
+
+        var initphase = 1
+        var initphaselimit = 15
+        var countdown = 10
+
+        var xa = 19000
+        //var xa = 0
+        var xb = xa + 30000 + 10000 * 15
+
+        function increaseInitphase() {
+            initphase += 1;
+
+            if (initphase <= initphaselimit) {
+                document.getElementById("initphases").innerHTML = initphase + " / " + initphaselimit
+            }
+           
+        }
+        function initPhaseCountdown() {
+            countdown = countdown - 1;
+
+            if (countdown > 1) {
+                document.getElementById("initreadytext").innerHTML = "Prozess startet in " + countdown + " Sekunden."
+            }
+            else if (countdown == 1) {
+                document.getElementById("initreadytext").innerHTML = "Prozess startet in " + countdown + " Sekunde."
+            }
+            else {
+                document.getElementById("initReadyScreen").style.display = "none"
+            }
+            
+        }
+
+        
+        
+
+
+
+        var showText = function (target, message, index, interval) {   
+            if (index < message.length) {
+                $(target).append(message[index++]);
+                setTimeout(function () { showText(target, message, index, interval); }, interval);
+            }
+        }
+        //showText("#secondSentence", "Hello, World!", 0, 500);
+        //setTimeout(() => {document.getElementById("secondSentence").style.display = "block"}, 5000);
+
+        
+
+        setTimeout(() => {
+            document.getElementById("logoscreen").style.display = "none";
+            document.getElementById("initnav").style.display = "block";
+            document.getElementById("initwholeprogress").style.display = "block";
+            document.getElementById("initRelaxScreen").style.display = "block";
+        }, 5000);
+
+
+        setTimeout(() => {showText("#initializationtitle", "Initialisierungsphase", 0, 20); }, 6000);
+        setTimeout(() => {showText("#firstSentence", "Um gedankenbasierte Kommunikation zu ermöglichen, muss eine künstliche Intelligenz mit deinen Gehirnströmen trainiert werden.", 0, 20); }, 8000);
+        setTimeout(() => {showText("#secondSentence", "Das Training hat bereits begonnen. Bleibe ganz entspannt und folge den Erklärungen und Anweisungen.", 0, 20);}, 12000);
+        setTimeout(() => {document.getElementById("progressarrow").style.display = "block"}, 16000);
+        setTimeout(() => {showText("#arrowtext", "An diesem Balkendiagramm erkennst du den Fortschritt innerhalb der Initialisierungsphase.", 0, 20);}, 16500);
+        
+
+        setTimeout(() => {
+            document.getElementById("initRelaxScreen").style.display = "none";
+            document.getElementById("initHandMovementScreen").style.display = "block";
+        }, xa);
+
+        
+
+        //setInterval(() => initPhaseCountdown(), xa + 1000 )
+
+        //setTimeout(() => {showText("#inithandtext", "Verschiebe die linke Kugel in das Loch auf der rechten Seite, indem Du daran denkst, Deine Hände zu bewegen.", 0, 20); }, xa + 0);
+        setTimeout(() => {showText("#inithandtext", "Denke immer wieder daran, Deine Hände zu Fäusten zu ballen! So verschiebst Du die Kugel von links nach rechts.", 0, 20); }, xa + 0);
+        //setTimeout(() => {document.getElementById("outerprogressinit").style.display = "block"}, 2000);
+        
+        setTimeout(() => {document.getElementById("arrowtwo").style.display = "block"}, xa + 4500);
+        setTimeout(() => {showText("#arrowtwotext", "Dieser Gedanke wird 15 mal gemessen.", 0, 20); }, xa + 5000);
+        setTimeout(() => {document.getElementById("arrowtwo").style.display = "none"}, xa + 8000);
+        setTimeout(() => {document.getElementById("arrowtwotext").style.display = "none"}, xa + 8000);
+
+        setTimeout(() => {document.getElementById("initElements").style.display = "block"}, xa + 8500);
+
+        setTimeout(() => {document.getElementById("arrowthree").style.display = "block"}, xa + 9300);
+        setTimeout(() => {showText("#arrowthreetext", "Deine Gedanken werden in Intervallen von je 10 Sekunden gemessen. Dieser Balken zeigt den Fortschritt.", 0, 20); }, xa + 9700);
+
+        setTimeout(() => {document.getElementById("arrowthree").style.display = "none"}, xa + 14000);
+        setTimeout(() => {document.getElementById("arrowthreetext").style.display = "none"}, xa + 14000);
+
+
+        setTimeout(() => {document.getElementById("initReadyScreen").style.display = "block"}, xa + 14500);
+        setTimeout(() => {showText("#initreadyh1", "Bereit?", 0, 20); }, xa + 16500);
+        setTimeout(() => {showText("#initreadytext", "Prozess startet in 10 Sekunden.", 0, 20); }, xa + 18000);
+        setTimeout(() => {setInterval(() => initPhaseCountdown(), 1000 )}, xa + 19000);
+        setTimeout(() => {setInterval(() => increaseInitphase(), 10000 ) }, xa + 30000)
+
+
+
+        setTimeout(() => {document.getElementById("initEndScreen").style.display = "block"; }, xb);
+
+        setTimeout(() => {showText("#endh1", "Initialisierung abgeschlossen.", 0, 20); }, xb + 1200);
+        setTimeout(() => {showText("#endtext", "Die künstliche Intelligenz wird mit deiner Gehirnaktivität trainiert. Nach Abschluss wirst du zur Applikation geleitet.", 0, 20); }, xb + 2000);
+
+        setTimeout(() => {
+            document.getElementById("initEndScreen").style.display = "none";
+            document.getElementById("logoscreen").style.display = "block"; }, xb + 8000)
+
+        setTimeout(() => {window.location.href = "home.html";},  xb + 8000 + 5000)
+        
+        
+
+  /*
+        // Initialize Cloud Firestore through Firebase
+        firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+      
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8",
+            authDomain: "neuroga-8e07e.firebaseapp.com",
+            projectId: "neuroga-8e07e",
+            storageBucket: "neuroga-8e07e.appspot.com",
+            messagingSenderId: "243769639637",
+            appId: "1:243769639637:web:8b51320cc152b7e1b5185c"
+        };
+
+
+        var docRef = db.collection("questionnaire").doc("questionnaire");
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+
+                document.getElementById("mainquestion").innerHTML = doc.data().question
+                document.getElementById("initializationIntervals").innerHTML = doc.data().intervals
+                document.getElementById("initializationQuality").innerHTML = doc.data().quality
+                document.getElementById("certainty").innerHTML = doc.data().certainty + "%"
+                document.getElementById("barinner").style.width = doc.data().certainty + "%"
+                //document.getElementById("qualitybar").style.width = doc.data().certainty + "%;"
+                
+
+                document.getElementById("brainactivity").innerHTML = doc.data().brainactivity
+                document.getElementById("loadingscreen").style.display = "none";
+                document.getElementById("content").style.display = "block";
+
+                
+                
+
+
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+        */
+
+
+        /*
+        setInterval(() => {
+
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+
+                    document.getElementById("mainquestion").innerHTML = doc.data().question
+                    document.getElementById("initializationIntervals").innerHTML = doc.data().intervals
+                    document.getElementById("initializationQuality").innerHTML = doc.data().quality
+                    document.getElementById("certainty").innerHTML = doc.data().certainty + "%"
+                    //document.getElementById("qualitybar").style.width = doc.data().certainty + "%;"
+                    document.getElementById("barinner").style.width = doc.data().certainty + "%"
+                    
+
+                    document.getElementById("brainactivity").innerHTML = doc.data().brainactivity
+                    document.getElementById("loadingscreen").style.display = "none";
+                    document.getElementById("content").style.display = "block";
+
+                    if (doc.data().certainty > 70) {
+                        if (doc.data().answer == "Ja") {
+                            document.getElementById("buttonOne").style.background = "#1E71F3";
+                            document.getElementById("buttonTwo").style.background = "#444";
+                        }
+                        else if (doc.data().answer == "Nein") {
+                            document.getElementById("buttonTwo").style.background = "#1E71F3";
+                            document.getElementById("buttonOne").style.background = "#444";
+                        }
+                        else {
+                            document.getElementById("buttonTwo").style.background = "#444";
+                            document.getElementById("buttonOne").style.background = "#444";
+                        }
+                    }
+                    else {
+                        document.getElementById("buttonTwo").style.background = "#444";
+                        document.getElementById("buttonOne").style.background = "#444";
+                    }
+
+                    if (doc.data().initialization_ready) {
+                        document.getElementById("initscreen").style.display = "none";
+                    }
+                    
+
+
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+            
+        }, 2000);*/
+        
+
+
+
+    </script>
+
+
+
+</html>

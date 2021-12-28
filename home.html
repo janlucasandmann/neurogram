@@ -1,0 +1,318 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="main.css">
+        <title>Neurogram</title>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+
+    </head>
+    <body class="homebody">
+
+        <div id="modeltrainingscreen">
+            <div class="vertical">
+                <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                <div class="margin20"></div>
+                <h2>Die künstliche Intelligenz wird gerade trainiert.</h2>
+                <div class="margin10"></div>
+                <p>Bitte habe noch einen Moment Geduld.</p>
+                <div class="margin10"></div>
+            </div>
+        </div>
+
+
+        <div class="homenav">
+            <a class="hometitle">Neurogram</a>
+            <!--<a class="helmetbutton">Account</a>-->
+            <div class="profileicon"><div class="vertical"><img src="img/profileimg.png" class="profileimg"></div></div>
+            <a class="navlink">Hilfe</a>
+            <a class="navlink">Analytics</a>
+        </div>
+
+        <div class="homehello">
+            <div class="content">
+
+                <h2>Willkommen zurück, Kerstin!</h2>
+                <div class="margin10"></div>
+            <!--<p>Dein Neurogram Hat ist einsatzbereit.</p>-->
+            <img src="img/search.png" class="searchicon">
+                <input type="text" class="searchbar" placeholder="Nach Apps suchen">
+            <div class="categorybox"><p>Alle Kategorien &nbsp; ▾</p></div>
+            <div class="sortbox"><a class="sortlink">Sortieren</a><p>Empfohlen <a class="sortlinkright">▾</a></p></div>
+              <!-- <a class="searchbutton" id="searchbutton">Suchen</a>-->
+            </div>
+
+        </div>
+       
+    
+            <div class="margin64"></div>
+    <div class="content">
+        <div class="apps">
+
+            <a href="advancedtraining.html">
+                <div class="appicon" id="firstappicon">
+                    <p>Neurogram</p>
+                    <h2>Kalibrierung</h2>
+                    <div class="margin10"></div>
+                    <center><img src="img/calibratelogo.png" class="appiconlogo"></center>
+                    <p>Kalibriere die KI, sodass deine Gedanken verstanden werden können.</p>   
+                </div>
+
+            </a>
+            <a href="index.html">
+                <div class="appicon" id="secondappicon">
+                    <p>Neurogram</p>
+                    <h2>Messenger</h2>
+                    <div class="margin10"></div>
+                    <center><img src="img/messengericonnew.png" class="appiconlogo"></center>
+                    <p>Beantworte Fragen ausschließlich mit Hilfe deiner Gedanken.</p>   
+                </div>
+
+            </a>
+            <a href="youtube.html">
+                <div class="appicon" id="thirdappicon">
+                    <p>Google</p>
+                    <h2>Youtube</h2>
+                    <div class="margin10"></div>
+                    <center><img src="img/youtubeiconnew.png" class="appiconlogo"></center>
+                    <p>Schaue interessante Videos von Menschen überall auf der Welt.</p>   
+                </div>
+
+            </a>
+        
+
+</div>
+
+
+<div class="apps" id="appsrowtwo">
+<div class="approwtwomargin"></div>
+    <a href="blackjack.html">
+        <div class="appicon" id="fourthappicon">
+            <p>Neurogram</p>
+            <h2>Black Jack</h2>
+            <div class="margin10"></div>
+            <center><img src="img/blackjackicon.png" class="appiconlogo"></center>
+            <p>Spiele Black Jack gegen eine künstliche Intelligenz.</p>   
+        </div>
+
+    </a>
+
+
+
+</div>
+
+
+
+
+
+
+        </div>
+
+        <div class="footer"></div>
+
+        <div id="verbundenleiste"">
+            <div class="content"><img src="img/comwhite.png" class="verbundenimg"><p>Verbunden mit Neurogram OpenBCI Hat.</p></div>
+        </div>
+
+        <div id="nichtverbundenliste">
+            <div class="content"><img src="img/comblack.png" class="verbundenimg"><p>Kein Gerät verbunden.</p></div>
+        </div>
+    
+    </body>
+
+</html>
+
+
+
+
+<script>
+
+    /*
+
+
+    // Initialize Cloud Firestore through Firebase
+    firebase.initializeApp({
+        apiKey: 'AIzaSyA8FY0XVcjKiYhoEAtZOeAOS45vTQKtCM8',
+        authDomain: 'neuroga-8e07e.firebaseapp.com',
+        projectId: 'neuroga-8e07e'
+        });
+
+        var db = firebase.firestore();
+
+
+        var cityRef = db.collection('platform').doc('platform');
+
+        var setWithMerge = cityRef.set({
+            classification_status: false,
+            initialization_status: false,
+            advancedtraining_status: false,
+            youtube_status: false,
+        }, { merge: true });
+
+
+
+
+    var connectionState = false
+
+    function changeConnectionState() {
+
+        if (connectionState == false) {
+            connectionState = true;
+            document.getElementById("nichtverbundenliste").style.display = "none";
+            document.getElementById("verbundenleiste").style.display = "block";
+        }
+        else {
+            connectionState = false;
+            document.getElementById("nichtverbundenliste").style.display = "block";
+            document.getElementById("verbundenleiste").style.display = "none";
+            
+        }
+        
+    }
+
+    //setTimeout(() => {changeConnectionState()}, 2000)
+
+
+    var docRef = db.collection("platform").doc("platform");
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+
+
+            if(doc.data().ai_is_training) {
+                document.getElementById("modeltrainingscreen").style.display = "block";
+            }
+            else {
+                document.getElementById("modeltrainingscreen").style.display = "none";
+            }
+
+
+
+
+            if(doc.data().connection == true) {
+                document.getElementById("verbundenleiste").style.display = "block"
+                connectionState = true
+            }
+            else {
+                document.getElementById("nichtverbundenliste").style.display = "block"
+
+
+                document.getElementById("firstappicon").classList.add("inactiveappicon");
+            document.getElementById("secondappicon").classList.add("inactiveappicon");
+            document.getElementById("thirdappicon").classList.add("inactiveappicon");
+            document.getElementById("fourthappicon").classList.add("inactiveappicon");
+                
+                connectionState = false
+            }
+
+
+
+            if(doc.data().initialization_done == false) {
+                document.getElementById("secondappicon").classList.add("inactiveappicon");
+                document.getElementById("thirdappicon").classList.add("inactiveappicon");
+                document.getElementById("fourthappicon").classList.add("inactiveappicon");
+                document.getElementById("fourthappicon").classList.add("inactiveappicon");
+
+            }
+
+
+
+        }
+        else {
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
+
+
+
+
+    setInterval(() => {
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+
+
+            if(doc.data().ai_is_training) {
+                document.getElementById("modeltrainingscreen").style.display = "block";
+            }
+            else {
+                document.getElementById("modeltrainingscreen").style.display = "none";
+            }
+
+            if(doc.data().connection) {
+                if (connectionState == false) {
+                    document.getElementById("nichtverbundenliste").style.display = "none"
+                    document.getElementById("verbundenleiste").style.display = "block"
+                    connectionState = true
+
+                    document.getElementById("firstappicon").classList.remove("inactiveappicon");
+            document.getElementById("secondappicon").classList.remove("inactiveappicon");
+            document.getElementById("thirdappicon").classList.remove("inactiveappicon");
+            document.getElementById("fourthappicon").classList.remove("inactiveappicon");
+                }
+                
+            }
+            else {
+                if (connectionState == true) {
+                    document.getElementById("nichtverbundenliste").style.display = "block"
+                    document.getElementById("verbundenleiste").style.display = "none"
+                    connectionState = false
+
+                    document.getElementById("firstappicon").classList.add("inactiveappicon");
+            document.getElementById("secondappicon").classList.add("inactiveappicon");
+            document.getElementById("thirdappicon").classList.add("inactiveappicon");
+            document.getElementById("fourthappicon").classList.add("inactiveappicon");
+                }
+            }
+
+            if(doc.data().initialization_done == true) {
+                document.getElementById("firstappicon").classList.remove("inactiveappicon");
+                document.getElementById("secondappicon").classList.remove("inactiveappicon");
+                document.getElementById("thirdappicon").classList.remove("inactiveappicon");
+                document.getElementById("fourthappicon").classList.remove("inactiveappicon");
+            }
+            else {
+                document.getElementById("secondappicon").classList.add("inactiveappicon");
+                document.getElementById("thirdappicon").classList.add("inactiveappicon");
+                document.getElementById("thirdappicon").classList.add("inactiveappicon");
+                document.getElementById("fourthappicon").classList.add("inactiveappicon");
+
+            }
+            
+
+
+            
+
+
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
+}, 2000);
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+</script>
